@@ -1,0 +1,72 @@
+<div>
+  <h1 class="font-bold text-4xl">About MyMusic</h1>
+</div>  
+<div class="text-sm">
+  <p>For the Ruby music app, data will be sourced from the Faker Gem and the Rest Countries API (<a href="https://restcountries.com/v3.1/all" target="_blank">https://restcountries.com/v3.1/all</a>). The Faker Gem provides detailed information on artists, albums, and songs, while the Rest Countries API supplies country information. The database will include tables for artists, albums, songs, countries, and categories, along with join tables for many-to-many relationships between albums and artists, as well as albums and songs. Artists are linked to countries, albums are linked to multiple artists and categories, and songs can belong to multiple albums. Data integration involves fetching and populating the respective tables with data from the APIs, ensuring relational consistency across the app's dataset.</p>
+
+ <p>The following are the required database tables and columns</p>
+  <p>1. Artists Table</p>
+    <p><strong>artists</strong></p>
+    <ul><li>id: Primary key</li>
+    <li>name: String</li>
+    <li>country_id: Foreign key referencing countries</li>
+    <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+    
+  2. Albums Table
+  <p><strong>albums</strong></p>
+  <ul><li>id: Primary key</li>
+  <li>title: String</li>
+  <li>release_date: Date</li>
+  <li>category_id: Foreign key referencing categories</li>
+  <li>image: String (URL to the album image)</li>
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+
+  
+  3. Songs Table
+  <p><strong>songs</strong></p>
+  <ul><li>id: Primary key</li>
+  <li>title: String</li>
+  <li>duration: Integer (in seconds)</li>
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+ 
+  4. Countries Table
+  <p><strong>countries</strong></p>
+  <ul><li>id: Primary key</li>
+  <li>name: String</li>
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+
+  5. Categories Table
+  <p><strong>categories</strong></p>
+  <ul><li>id: Primary key
+  <li>name: String
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+  
+  6. AlbumsArtists Table (Join Table)
+  <p><strong>albums_artists</strong></p>
+  <ul><li>id: Primary key</li>
+  <li>album_id: Foreign key referencing albums</li>
+  <li>artist_id: Foreign key referencing artists</li>
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+  
+  7. AlbumsSongs Table (Join Table)
+  <p><strong>albums_songs</strong></p>
+  <ul><li>id: Primary key</li>
+  <li>album_id: Foreign key referencing albums</li>
+  <li>song_id: Foreign key referencing songs</li>
+  <li>created_at: Timestamp</li>
+  <li>updated_at: Timestamp</li></ul>
+
+
+  <p><strong>Models and Relationships</strong><p>
+  <ul><li>Artist has many Albums through a join table artists_albums and belongs to a Country.
+  <li>Album has many Artists through a join table artists_albums, belongs to a Category, and has many Songs through a join table albums_songs.</li>
+  <li>Song has many Albums through a join table albums_songs.</li>
+  <li>Country has many Artists.</li>
+  <li>Category has many Albums.</li></ul>
+</div>

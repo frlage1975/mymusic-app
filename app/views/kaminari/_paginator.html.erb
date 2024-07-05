@@ -1,0 +1,18 @@
+<%# app/views/kaminari/_paginator.html.erb %>
+<div class="flex justify-center mt-4">
+  <%= link_to_unless page.previous?('Previous', params.merge(page: page.prev)) do %>
+    <span class="mr-2 px-4 py-2 text-gray-500 bg-gray-200 rounded cursor-not-allowed">Previous</span>
+  <% end %>
+
+  <% (1..page.total_pages).each do |i| %>
+    <%= link_to_unless page.current?(i, params.merge(page: i)) do %>
+      <span class="mx-2 px-4 py-2 text-white bg-blue-500 rounded"><%= i %></span>
+    <% else %>
+      <span class="mx-2 px-4 py-2 text-blue-500 bg-gray-200 rounded"><%= i %></span>
+    <% end %>
+  <% end %>
+
+  <%= link_to_unless page.next?('Next', params.merge(page: page.next)) do %>
+    <span class="ml-2 px-4 py-2 text-gray-500 bg-gray-200 rounded cursor-not-allowed">Next</span>
+  <% end %>
+</div>

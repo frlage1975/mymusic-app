@@ -1,21 +1,21 @@
 <div class="container mx-auto px-4">
-  <h1 class="text-3xl font-bold my-4">Countries</h1>
+  <h1 class="text-3xl font-bold mb-4">Album Categories</h1>
 
   <table class="min-w-full bg-white border border-gray-300">
     <thead class="bg-gray-500 border-b-2 border-gray-200">
       <tr>
-        <th class="py-2 px-4 border-b">Country</th>
-        <th class="py-2 px-4 border-b text-center">Number of Artists</th>
+        <th class="py-2 px-4 border-b">Category</th>
+        <th class="py-2 px-4 border-b text-center">Number of Albums</th>
       </tr>
     </thead>
     <tbody>
-      <% @countries.each do |country| %>
+      <% @categories.each do |category| %>
         <tr>
           <td class="py-2 px-4 border-b">
-            <%= country.name %>
+            <%= category.name %>
           </td>
           <td class="py-2 px-4 border-b text-center">
-            <%= country.artists_count %>
+            <%= category.albums_count %>
           </td>
         </tr>
       <% end %>

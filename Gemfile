@@ -71,3 +71,5 @@ gem "tailwindcss-rails", "~> 2.6"
 gem "faker", "~> 3.4"
 
 gem "rest-client", "~> 2.1"
+
+gem "kaminari", "~> 1.2"

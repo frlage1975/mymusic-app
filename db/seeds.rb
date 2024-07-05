@@ -22,7 +22,7 @@ end
 
   rand(1..3).times do
     category = Category.order('RANDOM()').first
-    album = Album.create(title: Faker::Music.album, category: category)
+    album = Album.create(title: Faker::Music.album, category: category, image: Faker::LoremFlickr.image(size: "300x300", search_terms: ['music', Faker::Number.rand(1..100).to_s]))
     artist.albums << album
 
     rand(8..10).times do

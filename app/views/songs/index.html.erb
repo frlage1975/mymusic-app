@@ -1,0 +1,27 @@
+<div class="container mx-auto px-4">
+  <h1 class="text-3xl font-bold mb-4">Songs</h1>
+
+  <table class="min-w-full bg-white border border-gray-300">
+    <thead class="bg-gray-500 border-b-2 border-gray-200">
+      <tr>
+        <th class="py-2 px-4 border-b">Song Title</th>
+        <th class="py-2 px-4 border-b">Albums</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @songs.each do |song| %>
+        <tr>
+          <td class="py-2 px-4 border-b">
+            <%= song.title %>
+          </td>
+          <td class="py-2 px-4 border-b">
+            <% song.albums.each do |album| %>
+              <%= link_to album.title, album_path(album), class: "text-blue-500 hover:underline" %><br>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
