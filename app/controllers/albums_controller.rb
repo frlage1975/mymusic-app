@@ -1,10 +1,10 @@
 class AlbumsController < ApplicationController
-  # def index
-  #   @albums = Album.includes(:artists).page(params[:page]).per(10)
-  # end
-
   def index
-    @albums = Album.includes(:artists, :category).order(Arel.sql('RANDOM()')).page(params[:page]).per(10)
+    if params[:query].present?
+      @albums = Album.joins(:artists).where('LOWER(albums.title) LIKE ?', "%#{params[:query].downcase}%").order(title: :asc)
+    else
+      @albums = Album.includes(:artists, :category).order(Arel.sql('RANDOM()')).page(params[:page]).per(10)
+    end
   end
 
   def show

@@ -1,5 +1,5 @@
 class Song < ApplicationRecord
   has_and_belongs_to_many :albums
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: true
 end

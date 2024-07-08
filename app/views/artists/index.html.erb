@@ -1,6 +1,27 @@
 <div class="container mx-auto px-4">
   <h1 class="text-3xl font-bold my-4">Artists</h1>
 
+  <%= form_with url: artists_path, method: :get, local: true do %>
+    <div class="mb-4 flex space-x-2">
+      <div>
+        <%= label_tag :query, 'Search' %>
+        <%= text_field_tag :query, params[:query], class: "border rounded p-2 w-full" %>
+      </div>
+      <div>
+        <%= label_tag :search_type, 'Search By' %>
+        <%= select_tag :search_type, options_for_select([['All', 'all'], ['Artist', 'artist'], ['Country', 'country'], ['Album', 'album']], selected: params[:search_type]), include_blank: true, class: "border rounded p-2 w-full" %>
+      </div>
+      <div class="flex items-end">
+        <%= submit_tag 'Search', class: "bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700" %>
+      </div>
+      <% if params[:query].present? || params[:search_type].present? %>
+        <div class="flex items-end">
+          <%= link_to 'Clear', artists_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-700" %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+  
   <table class="min-w-full bg-white border border-gray-300">
     <thead class="bg-gray-500 border-b-2 border-gray-200">
       <tr>
@@ -10,30 +31,36 @@
       </tr>
     </thead>
     <tbody>
-      <% @artists.each do |artist| %>
+      <% if @artists.empty? %>
         <tr>
-          <td class="py-2 px-4 border-b">
-            <%= link_to artist.name, artist_path(artist), class: "p-3 text-sm text-blue-500 hover:text-gray-700 focus:text-blue-700 no-underline" %>
-          </td>
-          <td class="py-2 px-4 border-b">
-            <% if artist.country.present? %>
-              <%= artist.country.name %>
-            <% else %>
-              N/A
-            <% end %>
-          </td>
-          <td class="py-2 px-4 border-b">
-            <% if artist.albums.present? %>
-              <ul>
-                <% artist.albums.each do |album| %>
-                  <li><%= link_to album.title, album_path(album), class: "p-3 text-sm text-blue-500 hover:text-gray-700 focus:text-blue-700 no-underline" %></li>
-                <% end %>
-              </ul>
-            <% else %>
-              No albums
-            <% end %>
-          </td>
+          <td colspan="3" class="py-4 px-4 text-center">No results found for your search.</td>
         </tr>
+      <% else %>
+        <% @artists.each do |artist| %>
+          <tr>
+            <td class="py-2 px-4 border-b">
+              <%= link_to artist.name, artist_path(artist), class: "p-3 text-sm text-blue-500 hover:text-gray-700 focus:text-blue-700 no-underline" %>
+            </td>
+            <td class="py-2 px-4 border-b">
+              <% if artist.country.present? %>
+                <%= artist.country.name %>
+              <% else %>
+                N/A
+              <% end %>
+            </td>
+            <td class="py-2 px-4 border-b">
+              <% if artist.albums.present? %>
+                <ul>
+                  <% artist.albums.each do |album| %>
+                    <li><%= link_to album.title, album_path(album), class: "p-3 text-sm text-blue-500 hover:text-gray-700 focus:text-blue-700 no-underline" %></li>
+                  <% end %>
+                </ul>
+              <% else %>
+                No albums
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </tbody>
   </table>
